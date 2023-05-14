@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "pitchblack",
+  "version": "${version}",
+
+  "name": "Pitch  Black",
+  "description": "Removes minimal light level to allow for true darkness.",
+  "authors": [
+    "Grondag",
+    "Arazadaz"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/darkness/darkness.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [ "com.glitaz.pitchblack.PitchBlack" ],
+    "client": [ "com.glitaz.pitchblack.PitchBlackClient" ],
+    "server": [ "com.glitaz.pitchblack.PitchBlackServer" ],
+    "modmenu": [ "com.glitaz.pitchblack.client.gui.PitchBlackModMenuHelper" ]
+  },
+  "mixins": [ "pitchblack.mixins.json" ],
+  "access_widener": ["pitchblack.ac.accesswidener"],
+
+  "depends": {
+    "fabricloader": ">=0.14.9",
+    "fabric-api": "*",
+    "minecraft": "~1.19",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
