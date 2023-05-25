@@ -37,7 +37,7 @@ public class PlayerJoinCallback {
 				});
 	}
 
-
+	//DS stands for dedicated server
 	public static void registerDS(){
 		ServerLoginConnectionEvents.QUERY_START.register(PlayerJoinCallback::onLoginStart);
 	}
