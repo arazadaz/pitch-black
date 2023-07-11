@@ -24,6 +24,28 @@ repositories {
 		name = 'ModMenu'
 		url = "https://maven.terraformersmc.com/releases"
 	}
+
+	maven {
+		name = "Ladysnake Libs"
+		url = 'https://ladysnake.jfrog.io/artifactory/mods'
+	}
+	maven {
+		name = "JitPack"
+		url = 'https://jitpack.io'
+	}
+	maven {
+		url = 'https://maven.cafeteria.dev'
+		content {
+			includeGroup 'net.adriantodt.fabricmc'
+		}
+	}
+	maven {
+		url "https://maven.shedaniel.me/"
+	}
+	maven {
+		url "https://maven.terraformersmc.com/"
+	}
+
 }
 
 dependencies {
@@ -35,6 +57,11 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	//modApi "com.github.apace100:apoli:${project.apoli_version}"
+	//include "com.github.apace100:apoli:${project.apoli_version}"
+
+	modCompileOnly "com.github.apace100:apoli:${project.apoli_version}"
 
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.

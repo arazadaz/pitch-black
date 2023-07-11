@@ -34,7 +34,7 @@ import java.util.List;
 public class PitchBlack implements ModInitializer {
 
 	public static final Text INCORRECT_VERSION = Text.literal(String.format("Missing correct Pitch Black mod version"));
-	public static final int VERSION = 100;
+	public static final int VERSION = 101;
 
 	public static boolean darkOverworld;
 	public static boolean darkDefault;

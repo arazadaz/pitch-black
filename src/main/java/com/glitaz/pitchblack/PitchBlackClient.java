@@ -1,9 +1,11 @@
 package com.glitaz.pitchblack;
 
 import com.glitaz.pitchblack.RegisterHandlers.ClientInitRH;
+import com.glitaz.pitchblack.compatibility.OriginsNVCompat;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.LightmapTextureManager;
@@ -77,6 +79,9 @@ public class PitchBlackClient implements ClientModInitializer {
 	public static float luminance(float r, float g, float b) {
 		return r * 0.2126f + g * 0.7152f + b * 0.0722f;
 	}
+
+	private static int checkOriginPower = 1000;
+	private static float minLight = 0.06F;
 
 	public static void updateLuminance(float tickDelta, MinecraftClient client, GameRenderer worldRenderer, float prevFlicker) {
 		final ClientWorld world = client.world;
@@ -185,16 +190,28 @@ public class PitchBlackClient implements ClientModInitializer {
 						blue = 1.0F;
 					}
 
-					if (red < 0.0F) {
-						red = 0.0F;
+
+
+					if(FabricLoader.getInstance().isModLoaded("origins")){
+						if(checkOriginPower >= 1000) {
+							float originNVAdjust = OriginsNVCompat.getOriginNVStrenth(client.player);
+							minLight = originNVAdjust != 0 ? originNVAdjust/4 : 0.06F;
+							checkOriginPower = 0;
+						}
+						checkOriginPower ++;
 					}
 
-					if (green < 0.0F) {
-						green = 0.0F;
+					//Minimal light level that can be factorized.
+					if (red < minLight) {
+						red = minLight;
 					}
 
-					if (blue < 0.0F) {
-						blue = 0.0F;
+					if (green < minLight) {
+						green = minLight;
+					}
+
+					if (blue < minLight) {
+						blue = minLight;
 					}
 
 					LUMINANCE[blockIndex][skyIndex] = PitchBlackClient.luminance(red, green, blue);
